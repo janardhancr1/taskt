@@ -45,7 +45,7 @@ namespace taskt.Core.Automation.Commands
 
             var searchedValue = v_SearchItem.ConvertToUserVariable(sender);
 
-            targetList.Contains(searchedValue).StoreInUserVariable(engine, v_Result);
+            targetList.Contains(searchedValue.Trim()).StoreInUserVariable(engine, v_Result);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.User32;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using WindowsInput;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -134,7 +135,8 @@ namespace taskt.Core.Automation.Commands
             }
             else
             {
-                SendKeys.SendWait(textToSend);
+                KeyMouseControls.SendInput(textToSend);
+
             }
 
             var waitTime = this.ConvertToUserVariableAsInteger(nameof(v_WaitTime), engine);

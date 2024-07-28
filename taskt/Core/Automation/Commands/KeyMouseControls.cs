@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using WindowsInput;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -118,7 +119,7 @@ namespace taskt.Core.Automation.Commands
 
         [DllImport("user32.dll")]
         private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
-        
+
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
@@ -193,7 +194,7 @@ namespace taskt.Core.Automation.Commands
                     break;
             }
 
-            foreach(var mouse in actions)
+            foreach (var mouse in actions)
             {
                 mouse_event((int)mouse, xMousePosition, yMousePosition, 0, 0);
             }
@@ -220,6 +221,41 @@ namespace taskt.Core.Automation.Commands
         public static void KeyUp(Keys vKey)
         {
             keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+        }
+
+        public static void SendInput(string textToSend)
+        {
+            InputSimulator inputSimulator = new InputSimulator();
+            switch (textToSend)
+            {
+                case "{ENTER}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                    break;
+                case "^{a}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A);
+                    break;
+                case "^{c}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_C);
+                    break;
+                case "^{x}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_X);
+                    break;
+                case "{TAB}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.TAB);
+                    break;
+                case "{ESC}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.TAB);
+                    break;
+                case "{DOWN}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.DOWN);
+                    break;
+                case "{RIGHT}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RIGHT);
+                    break;
+                default:
+                    inputSimulator.Keyboard.TextEntry(textToSend);
+                    break;
+            }
         }
         #endregion
     }

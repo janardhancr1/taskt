@@ -115,7 +115,7 @@ namespace taskt.Core.Automation.Commands
             MethodInfo[] availableMethods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
             //get method
-            MethodInfo m = availableMethods.Where(f => f.ToString() == methodName).FirstOrDefault();
+            MethodInfo m = availableMethods.Where(f => f.Name.ToString() == methodName).FirstOrDefault();
 
 
             //create instance
@@ -195,7 +195,7 @@ namespace taskt.Core.Automation.Commands
                     }
                     else if ((param.ParameterType.IsArray))
                     {
-                        var parseResult = requiredParameterValue.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries);
+                        var parseResult = requiredParameterValue.Split(new char[] {':'});
                         parameters.Add(parseResult);
                     }
                     else
