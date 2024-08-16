@@ -855,8 +855,15 @@ namespace taskt.Core.Automation.Commands
             else if (targetElement.TryGetCurrentPattern(SelectionPattern.Pattern, out patternObj))
             {
                 // combobox
-                AutomationElement selElem = ((SelectionPattern)patternObj).Current.GetSelection()[0];
-                return selElem.Current.Name;
+                try
+                {
+                    AutomationElement selElem = ((SelectionPattern)patternObj).Current.GetSelection()[0];
+                    return selElem.Current.Name;
+                }
+                catch
+                {
+                    return "";
+                }
             }
             else
             {

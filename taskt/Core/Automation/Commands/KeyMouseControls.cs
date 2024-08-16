@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using WindowsInput;
+using System.Windows.Input;
+using SimpleNLG.Extensions;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -240,11 +242,17 @@ namespace taskt.Core.Automation.Commands
                 case "^{x}":
                     inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_X);
                     break;
+                case "^{f}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_F);
+                    break;
+                case "%{f}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.VK_F);
+                    break;
                 case "{TAB}":
                     inputSimulator.Keyboard.KeyPress(VirtualKeyCode.TAB);
                     break;
                 case "{ESC}":
-                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.TAB);
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
                     break;
                 case "{DOWN}":
                     inputSimulator.Keyboard.KeyPress(VirtualKeyCode.DOWN);
@@ -253,7 +261,14 @@ namespace taskt.Core.Automation.Commands
                     inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RIGHT);
                     break;
                 default:
-                    inputSimulator.Keyboard.TextEntry(textToSend);
+                    if (textToSend.Length > 1)
+                    {
+                        inputSimulator.Keyboard.TextEntry(textToSend);
+                    }
+                    else
+                    { 
+                        inputSimulator.Keyboard.KeyPress((VirtualKeyCode)textToSend.ToUpper().charAt(0));
+                    }
                     break;
             }
         }
