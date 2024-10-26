@@ -245,6 +245,12 @@ namespace taskt.Core.Automation.Commands
                 case "^{f}":
                     inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_F);
                     break;
+                case "{F11}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.F11);
+                    break;
+                case "{F6}":
+                    inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.F6);
+                    break;
                 case "%{f}":
                     inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.VK_F);
                     break;
@@ -259,6 +265,24 @@ namespace taskt.Core.Automation.Commands
                     break;
                 case "{RIGHT}":
                     inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RIGHT);
+                    break;
+                case "{LEFT}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.LEFT);
+                    break;
+                case "{HOME}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.HOME);
+                    break;
+                case "{END}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.END);
+                    break;
+                case "{PGDN}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.NEXT);
+                    break;
+                case "{PGUP}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.PRIOR);
+                    break;
+                case "{SPACE}":
+                    inputSimulator.Keyboard.KeyPress(VirtualKeyCode.SPACE);
                     break;
                 default:
                     if (textToSend.Length > 1)
